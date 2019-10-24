@@ -145,3 +145,8 @@ Desktop.ini
 # ESLint
 ######################
 .eslintcache
+
+######################
+# Visual Studio Code JDL pluggin 
+######################
+jdl/jhipster.png
