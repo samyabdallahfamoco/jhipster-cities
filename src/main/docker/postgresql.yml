@@ -1,0 +1,11 @@
+version: '2'
+services:
+  jhipstercities-postgresql:
+    image: postgres:11.5
+    # volumes:
+    #     - ~/volumes/jhipster/jhipsterCities/postgresql/:/var/lib/postgresql/data/
+    environment:
+      - POSTGRES_USER=jhipsterCities
+      - POSTGRES_PASSWORD=
+    ports:
+      - 5432:5432

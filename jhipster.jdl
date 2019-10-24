@@ -1,0 +1,28 @@
+entity City {
+    name String required
+    nbPeople Double required
+    postalCode String required
+}
+entity Area {
+    name String required
+}
+entity Country {
+    name String required
+}
+entity Manager {
+    firstName String required
+    lastName String required
+}
+relationship OneToMany {
+    Area{cities} to City{area}
+    Country{areas} to Area{country}
+}
+relationship ManyToMany {
+    Manager{countries} to Country{managers}
+}
+// Set an implementation of Service related to City
+service * with serviceImpl
+// Set pagination options
+paginate * with pagination
+// Set an angular suffix
+angularSuffix * with jhpCities
