@@ -1,0 +1,39 @@
+{
+    "name": "Country",
+    "fields": [
+        {
+            "fieldName": "name",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "required"
+            ]
+        }
+    ],
+    "relationships": [
+        {
+            "relationshipType": "one-to-many",
+            "otherEntityName": "area",
+            "otherEntityRelationshipName": "country",
+            "relationshipName": "areas"
+        },
+        {
+            "relationshipType": "many-to-many",
+            "otherEntityName": "manager",
+            "otherEntityRelationshipName": "countries",
+            "relationshipName": "managers",
+            "otherEntityField": "id",
+            "ownerSide": false
+        }
+    ],
+    "changelogDate": "20191024113052",
+    "entityTableName": "country",
+    "dto": "no",
+    "pagination": "pagination",
+    "service": "serviceImpl",
+    "jpaMetamodelFiltering": false,
+    "fluentMethods": true,
+    "readOnly": false,
+    "clientRootFolder": "",
+    "applications": "*",
+    "angularJSSuffix": "jhpCities"
+}
