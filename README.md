@@ -2,6 +2,28 @@
 
 This application was generated using JHipster 6.4.1, you can find documentation and help at [https://www.jhipster.tech/documentation-archive/v6.4.1](https://www.jhipster.tech/documentation-archive/v6.4.1).
 
+## History of commands in terminal
+
+`java -version` : 11.0.2
+`jhipster` :
+Which _type_ of application would you like to create? Monolithic application (recommended for simple projects)
+? What is the base name of your application? jhipsterCities
+? What is your default Java package name? com.famoco.jhipstercities
+? Do you want to use the JHipster Registry to configure, monitor and scale your application? No
+? Which _type_ of authentication would you like to use? OAuth 2.0 / OIDC Authentication (stateful, works with Keycloak and Okta)
+? Which _type_ of database would you like to use? SQL (H2, MySQL, MariaDB, PostgreSQL, Oracle, MSSQL)
+? Which _production_ database would you like to use? PostgreSQL
+? Which _development_ database would you like to use? PostgreSQL
+? Do you want to use the Spring cache abstraction? No - Warning, when using an SQL database, this will disable the Hibernate 2nd level cache!
+? Would you like to use Maven or Gradle for building the backend? Gradle
+? Which other technologies would you like to use? (Press <space> to select, <a> to toggle all, <i> to invert selection)
+? Which _Framework_ would you like to use for the client? Angular
+? Would you like to use a Bootswatch theme (https://bootswatch.com/)? Default JHipster
+? Would you like to enable internationalization support? Yes
+? Please choose the native language of the application English
+? Please choose additional languages to install (Press <space> to select, <a> to toggle all, <i> to invert selection)
+? Besides JUnit and Jest, which testing frameworks would you like to use? (Press <space> to select, <a> to toggle all, <i> to invert selection)
+
 ## Development
 
 Before you can build this project, you must install and configure the following dependencies on your machine:
