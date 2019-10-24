@@ -1,6 +1,33 @@
 @import 'bootstrap-variables';
 @import '~bootstrap/scss/functions';
 @import '~bootstrap/scss/variables';
+@import 'material';
+
+/**
+* we can use some variable here, that we can share in each front css
+**/
+$primary-background-color: #fafafa;
+$padding-main-content: 15px 20px;
+$margin-right-filter: 15px;
+$action-back-margin-top: 20px;
+
+html {
+  height: 100%;
+  // flex: 1;
+  body {
+    // display: flex;
+    height: 100%;
+    // flex: 1;
+    background-color: $primary-background-color;
+  }
+}
+/**
+* Remove blue outline from chrome ...
+**/
+*:focus {
+  outline: none !important;
+  border: 0 !important;
+}
 
 /* ==============================================================
 Bootstrap tweaks

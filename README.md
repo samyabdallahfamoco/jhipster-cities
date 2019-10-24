@@ -56,6 +56,12 @@ This is your place, where you will spend a long time, bring your friends there, 
 
 --> At this point, everyone should be able to run the platform, if you have troubles (that happens, don't worry) we need to fix it, everyone in your team should run that on his/her machine, if you can't fix it, call me don't worry ! <--
 
+Now that everything is in place we can work ! (I know that it could have been painful to setup everything before)/
+
+What I want is to use Angular Material, let's use it : `https://material.angular.io/components/categories` (we have already bootstrap, what we are doing is making the build heavier, but you can do it)
+
+`npm install --save @angular/material @angular/cdk @angular/animations`
+
 ## Backend part
 
 The source code of the backend is there : `./src/main/java/com/famoco/jhipstercities`
@@ -67,6 +73,9 @@ The source code of the backend is there : `./src/main/java/com/famoco/jhipsterci
 ## Frontend part
 
 The source code of the frontend is there : `./src/main/webapp`
+
+If you want to develop just on this part without rebuilding everything again and again, simply use :
+`npm run start`
 
 ## Development
 
