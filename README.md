@@ -2,42 +2,71 @@
 
 This application was generated using JHipster 6.4.1, you can find documentation and help at [https://www.jhipster.tech/documentation-archive/v6.4.1](https://www.jhipster.tech/documentation-archive/v6.4.1).
 
-## History of commands in terminal
+## History of commands
+
+My java version :
 
 `java -version` : 11.0.2
 
-`jhipster` :
-Which _type_ of application would you like to create? Monolithic application (recommended for simple projects)
-? What is the base name of your application? jhipsterCities
-? What is your default Java package name? com.famoco.jhipstercities
-? Do you want to use the JHipster Registry to configure, monitor and scale your application? No
-? Which _type_ of authentication would you like to use? OAuth 2.0 / OIDC Authentication (stateful, works with Keycloak and Okta)
-? Which _type_ of database would you like to use? SQL (H2, MySQL, MariaDB, PostgreSQL, Oracle, MSSQL)
-? Which _production_ database would you like to use? PostgreSQL
-? Which _development_ database would you like to use? PostgreSQL
-? Do you want to use the Spring cache abstraction? No - Warning, when using an SQL database, this will disable the Hibernate 2nd level cache!
-? Would you like to use Maven or Gradle for building the backend? Gradle
-? Which other technologies would you like to use? (Press <space> to select, <a> to toggle all, <i> to invert selection)
-? Which _Framework_ would you like to use for the client? Angular
-? Would you like to use a Bootswatch theme (https://bootswatch.com/)? Default JHipster
-? Would you like to enable internationalization support? Yes
-? Please choose the native language of the application English
-? Please choose additional languages to install (Press <space> to select, <a> to toggle all, <i> to invert selection)
-? Besides JUnit and Jest, which testing frameworks would you like to use? (Press <space> to select, <a> to toggle all, <i> to invert selection)
+Jhipster init
 
-`jhipster import-jdl ./jdl/jhipster.jdl` -> Overwrite all (a)
+    `jhipster` :
+    Which _type_ of application would you like to create? Monolithic application (recommended for simple projects)
+    ? What is the base name of your application? jhipsterCities
+    ? What is your default Java package name? com.famoco.jhipstercities
+    ? Do you want to use the JHipster Registry to configure, monitor and scale your application? No
+    ? Which _type_ of authentication would you like to use? OAuth 2.0 / OIDC Authentication (stateful, works with Keycloak and Okta)
+    ? Which _type_ of database would you like to use? SQL (H2, MySQL, MariaDB, PostgreSQL, Oracle, MSSQL)
+    ? Which _production_ database would you like to use? PostgreSQL
+    ? Which _development_ database would you like to use? PostgreSQL
+    ? Do you want to use the Spring cache abstraction? No - Warning, when using an SQL database, this will disable the Hibernate 2nd level cache!
+    ? Would you like to use Maven or Gradle for building the backend? Gradle
+    ? Which other technologies would you like to use? (Press <space> to select, <a> to toggle all, <i> to invert selection)
+    ? Which _Framework_ would you like to use for the client? Angular
+    ? Would you like to use a Bootswatch theme (https://bootswatch.com/)? Default JHipster
+    ? Would you like to enable internationalization support? Yes
+    ? Please choose the native language of the application English
+    ? Please choose additional languages to install (Press <space> to select, <a> to toggle all, <i> to invert selection)
+    ? Besides JUnit and Jest, which testing frameworks would you like to use? (Press <space> to select, <a> to toggle all, <i> to invert selection)
 
-Installation of front dependencies : `npm install`
+JDL :
 
-Launch the docker that will contain you database : `docker-compose -f src/main/docker/postgresql.yml up -d`
+    `jhipster import-jdl ./jdl/jhipster.jdl` -> Overwrite all (a)
 
-Because we have selected OAuth2, we need to launch : `docker-compose -f src/main/docker/keycloak.yml up -d`
-Open : `http://localhost:9080/` on your browser (user: admin/admin)
-You will be able to manager users at this place.
+Installation of front dependencies :
 
-Finally run `./gradlew` to open your platform.
-Open : `http://localhost:8080/` (admin/admin or user/user)
+    `npm install`
+
+Launch the docker that will contain you database :
+
+    `docker-compose -f src/main/docker/postgresql.yml up -d`
+
+Because we have selected OAuth2, we need to launch :
+
+    `docker-compose -f src/main/docker/keycloak.yml up -d`
+    Open : `http://localhost:9080/` on your browser (user: admin/admin)
+    You will be able to manager users at this place.
+
+Build your platform :
+
+    Finally run `./gradlew` to open your platform.
+    Open : `http://localhost:8080/` (admin/admin or user/user)
+
 This is your place, where you will spend a long time, bring your friends there, have fun. ;)
+
+--> At this point, everyone should be able to run the platform, if you have troubles (that happens, don't worry) we need to fix it, everyone in your team should run that on his/her machine, if you can't fix it, call me don't worry ! <--
+
+## Backend part
+
+The source code of the backend is there : `./src/main/java/com/famoco/jhipstercities`
+
+- web.rest : each route/endpoint of your API
+- service : service layer called from web.rest folder or other services
+- repository : Where you make request to the DB
+
+## Frontend part
+
+The source code of the frontend is there : `./src/main/webapp`
 
 ## Development
 
