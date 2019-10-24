@@ -5,6 +5,7 @@ This application was generated using JHipster 6.4.1, you can find documentation 
 ## History of commands in terminal
 
 `java -version` : 11.0.2
+
 `jhipster` :
 Which _type_ of application would you like to create? Monolithic application (recommended for simple projects)
 ? What is the base name of your application? jhipsterCities
@@ -23,6 +24,20 @@ Which _type_ of application would you like to create? Monolithic application (re
 ? Please choose the native language of the application English
 ? Please choose additional languages to install (Press <space> to select, <a> to toggle all, <i> to invert selection)
 ? Besides JUnit and Jest, which testing frameworks would you like to use? (Press <space> to select, <a> to toggle all, <i> to invert selection)
+
+`jhipster import-jdl ./jdl/jhipster.jdl` -> Overwrite all (a)
+
+Installation of front dependencies : `npm install`
+
+Launch the docker that will contain you database : `docker-compose -f src/main/docker/postgresql.yml up -d`
+
+Because we have selected OAuth2, we need to launch : `docker-compose -f src/main/docker/keycloak.yml up -d`
+Open : `http://localhost:9080/` on your browser (user: admin/admin)
+You will be able to manager users at this place.
+
+Finally run `./gradlew` to open your platform.
+Open : `http://localhost:8080/` (admin/admin or user/user)
+This is your place, where you will spend a long time, bring your friends there, have fun. ;)
 
 ## Development
 
