@@ -56,11 +56,18 @@ This is your place, where you will spend a long time, bring your friends there, 
 
 --> At this point, everyone should be able to run the platform, if you have troubles (that happens, don't worry) we need to fix it, everyone in your team should run that on his/her machine, if you can't fix it, call me don't worry ! <--
 
-Now that everything is in place we can work ! (I know that it could have been painful to setup everything before)/
+Now that everything is in place we can work ! (I know that it could have been painful to setup everything before). (You can read bellow backend part and frontend part before to continue)
 
 What I want is to use Angular Material, let's use it : `https://material.angular.io/components/categories` (we have already bootstrap, what we are doing is making the build heavier, but you can do it)
 
 `npm install --save @angular/material @angular/cdk @angular/animations`
+
+I have added some code here in order to integreate material to the application.
+
+The good practive on jhipster is to try to not change the generate code. (Imagine that you can run `jhipster import-jdl` every time that you want to add an entity !!)
+Okay, now I want to display a list of cities using material design, let's generate a component that will be a simple table.
+`cd ./src/main/webapp/app/entities/city-jhp-cities/`
+`ng generate component ./impl/cityJhpCitiesImpl` (3 files will be created)
 
 ## Backend part
 
