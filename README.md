@@ -69,6 +69,8 @@ Okay, now I want to display a list of cities using material design, let's genera
 `cd ./src/main/webapp/app/entities/city-jhp-cities/`
 `ng generate component ./impl/cityJhpCitiesImpl` (3 files will be created)
 
+You can do the same with services, classes...
+
 ## Backend part
 
 The source code of the backend is there : `./src/main/java/com/famoco/jhipstercities`
