@@ -12,6 +12,7 @@ import { CityJhpCitiesDetailComponent } from './city-jhp-cities-detail.component
 import { CityJhpCitiesUpdateComponent } from './city-jhp-cities-update.component';
 import { CityJhpCitiesDeletePopupComponent } from './city-jhp-cities-delete-dialog.component';
 import { ICityJhpCities } from 'app/shared/model/city-jhp-cities.model';
+import { CityJhpCitiesImplComponent } from './impl/city-jhp-cities-impl/city-jhp-cities-impl.component';
 
 @Injectable({ providedIn: 'root' })
 export class CityJhpCitiesResolve implements Resolve<ICityJhpCities> {
@@ -32,7 +33,7 @@ export class CityJhpCitiesResolve implements Resolve<ICityJhpCities> {
 export const cityRoute: Routes = [
   {
     path: '',
-    component: CityJhpCitiesComponent,
+    component: CityJhpCitiesImplComponent,
     resolve: {
       pagingParams: JhiResolvePagingParams
     },

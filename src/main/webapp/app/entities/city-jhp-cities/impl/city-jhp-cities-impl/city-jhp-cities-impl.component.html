@@ -1,0 +1,48 @@
+<div class="cities-impl">
+    <div class="table-container">
+
+        <div class="progress-container">
+            <mat-progress-bar mode="indeterminate" *ngIf="citiesDataSource.loading$ | async"></mat-progress-bar>
+        </div>
+        <mat-table [dataSource]="citiesDataSource" matSort matSortActive="id" matSortDirection="desc">
+            <!--- Note that these columns can be defined in any order.
+                The actual rendered columns are set as a property on the row definition" -->
+            <!-- Active Column -->
+            <ng-container matColumnDef="id">
+                <mat-header-cell *matHeaderCellDef mat-sort-header>
+                    Id
+                </mat-header-cell>
+                <mat-cell *matCellDef="let city">{{city.id}}</mat-cell>
+            </ng-container>
+
+            <ng-container matColumnDef="name">
+                <mat-header-cell *matHeaderCellDef mat-sort-header>
+                    Name
+                </mat-header-cell>
+                <mat-cell *matCellDef="let city">{{city.name}}</mat-cell>
+            </ng-container>
+
+            <ng-container matColumnDef="nbPeople">
+                <mat-header-cell *matHeaderCellDef mat-sort-header>
+                    Number of people
+                </mat-header-cell>
+                <mat-cell *matCellDef="let city">{{city.nbPeople}}</mat-cell>
+            </ng-container>
+
+            <ng-container matColumnDef="postalCode">
+                <mat-header-cell *matHeaderCellDef mat-sort-header>
+                    Postal Code
+                </mat-header-cell>
+                <mat-cell *matCellDef="let city">{{city.postalCode}}</mat-cell>
+            </ng-container>
+
+            <mat-header-row *matHeaderRowDef="displayedColumns;"></mat-header-row>
+            <mat-row *matRowDef="let row; columns: displayedColumns;" class="clickable"></mat-row>
+        </mat-table>
+
+        <mat-paginator #paginator [length]="citiesDataSource.totalElements" [pageSize]="10"
+            [pageSizeOptions]="[5, 10, 20]" [showFirstLastButtons]="true">
+        </mat-paginator>
+
+    </div>
+</div>
