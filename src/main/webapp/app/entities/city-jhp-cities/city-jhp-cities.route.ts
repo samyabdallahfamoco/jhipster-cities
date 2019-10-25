@@ -7,7 +7,6 @@ import { Observable, of } from 'rxjs';
 import { filter, map } from 'rxjs/operators';
 import { CityJhpCities } from 'app/shared/model/city-jhp-cities.model';
 import { CityJhpCitiesService } from './city-jhp-cities.service';
-import { CityJhpCitiesComponent } from './city-jhp-cities.component';
 import { CityJhpCitiesDetailComponent } from './city-jhp-cities-detail.component';
 import { CityJhpCitiesUpdateComponent } from './city-jhp-cities-update.component';
 import { CityJhpCitiesDeletePopupComponent } from './city-jhp-cities-delete-dialog.component';
