@@ -7,6 +7,7 @@ import { JhipsterCitiesCoreModule } from 'app/core/core.module';
 import { JhipsterCitiesAppRoutingModule } from './app-routing.module';
 import { JhipsterCitiesHomeModule } from './home/home.module';
 import { JhipsterCitiesEntityModule } from './entities/entity.module';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 // jhipster-needle-angular-add-module-import JHipster will add new module here
 import { JhiMainComponent } from './layouts/main/main.component';
 import { NavbarComponent } from './layouts/navbar/navbar.component';
@@ -17,6 +18,7 @@ import { ErrorComponent } from './layouts/error/error.component';
 @NgModule({
   imports: [
     BrowserModule,
+    BrowserAnimationsModule,
     JhipsterCitiesSharedModule,
     JhipsterCitiesCoreModule,
     JhipsterCitiesHomeModule,
