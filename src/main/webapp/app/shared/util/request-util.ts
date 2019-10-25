@@ -16,3 +16,21 @@ export const createRequestOption = (req?: any): HttpParams => {
   }
   return options;
 };
+
+/**
+ * Represent a Request to backend endpoints allowing paging
+ */
+export interface Request {
+  /**
+   * The page number to get >=0
+   */
+  page: number;
+  /**
+   * The size of the page to retrieve
+   */
+  size: number;
+  /**
+   * A list of queryParam to sort/filter on
+   */
+  [key: string]: any;
+}
