@@ -1,10 +1,12 @@
 import { Component, OnInit, OnDestroy, ViewChild, AfterViewInit } from '@angular/core';
-import { CityJhpDataSource } from './city-jhp-cities-impl.datasource';
+import { CityJhpDataSource } from '../city-jhp-cities-impl.datasource';
 import { Subject } from 'rxjs';
 import { MatSort, MatPaginator } from '@angular/material';
-import { CityJhpCitiesImplService } from './city-jhp-cities-impl.service';
-import { tap } from 'rxjs/operators';
+import { CityJhpCitiesImplService } from '../city-jhp-cities-impl.service';
+import { tap, debounceTime, distinctUntilChanged, filter, takeUntil } from 'rxjs/operators';
 import { merge } from 'rxjs';
+import { FormBuilder } from '@angular/forms';
+import { CityJhpCitiesFilter } from '../city-jhp-cities-filter';
 
 @Component({
   selector: 'jhi-city-jhp-cities-impl',
@@ -23,6 +25,11 @@ export class CityJhpCitiesImplComponent implements OnInit, AfterViewInit, OnDest
   public citiesDataSource: CityJhpDataSource;
 
   /**
+   * Used by filters
+   */
+  public filter: CityJhpCitiesFilter = {};
+
+  /**
    * Destroy all subscription when OnDestroy() is called
    */
   private destroy$ = new Subject();
@@ -31,23 +38,71 @@ export class CityJhpCitiesImplComponent implements OnInit, AfterViewInit, OnDest
   @ViewChild(MatPaginator, { static: true }) private _paginator: MatPaginator;
 
   /**
-   * @param cityService allows to fetch data
+   * Each input inside the form view are describe into this FormGroup
    */
-  constructor(private cityService: CityJhpCitiesImplService) {}
+  public filterForm = this.fb.group({
+    filterNbPeopleMin: 0
+  });
+
+  /**
+   * @param cityService allows to fetch data
+   * @param fb: FormBuilder that alows to use form
+   */
+  constructor(private cityService: CityJhpCitiesImplService, private fb: FormBuilder) {}
 
   /**
    * Load cities and init subscription to each filter form
    */
   ngOnInit() {
     this.citiesDataSource = new CityJhpDataSource(this.cityService);
-    this.citiesDataSource.loadCities('id', 'desc', 0, 10);
+    this.citiesDataSource.loadCities(this.filter, 'id', 'desc', 0, 10);
+    this.subscribeToReactiveForm();
+  }
+
+  /**
+   * This method avoid duplication of code
+   * it will suscribe to change of a related formControlName and make request to the API depending on the filter
+   * The filter on null value is required when the user fill a field and then click on the reset button
+   *
+   * @param paramToFilter string, the name of the form group
+   * @param filterObjectField string, the key of the filter to set
+   * @param fcChangeValue method, the method that return the right value, example (val: string) => val) or (val: string) => value.format('YYYY-MM-DD')
+   */
+  private _filterFormField(formControlName: string, filterObjectField: string, fcChangeValue: (val: any) => any) {
+    this.filterForm
+      .get(formControlName)
+      .valueChanges.pipe(
+        debounceTime(300),
+        distinctUntilChanged(),
+        filter(value => value !== null),
+        takeUntil(this.destroy$)
+      )
+      .subscribe(value => {
+        this._paginator.pageIndex = 0;
+        this.filter[filterObjectField] = fcChangeValue(value);
+        this.loadCitiesPage();
+      });
+  }
+
+  /**
+   * For each input from the form, checking if the value change and making request to the API
+   * In order to refresh the table
+   */
+  private subscribeToReactiveForm(): void {
+    this._filterFormField('filterNbPeopleMin', 'nbPeopleMin', (val: number) => val);
   }
 
   /**
    * Allows to refresh cities list
    */
   private loadCitiesPage() {
-    this.citiesDataSource.loadCities(this._sort.active, this._sort.direction, this._paginator.pageIndex, this._paginator.pageSize);
+    this.citiesDataSource.loadCities(
+      this.filter,
+      this._sort.active,
+      this._sort.direction,
+      this._paginator.pageIndex,
+      this._paginator.pageSize
+    );
   }
 
   /**

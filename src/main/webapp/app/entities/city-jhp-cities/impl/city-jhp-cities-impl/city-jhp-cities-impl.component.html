@@ -1,6 +1,23 @@
 <div class="cities-impl">
-    <div class="table-container">
 
+    <div class="container-filters">
+        <form [formGroup]="filterForm">
+            <mat-form-field appearance="outline">
+                <mat-label>Nb of people Min</mat-label>
+                <mat-select formControlName="filterNbPeopleMin">
+                    <mat-option>Tous</mat-option>
+                    <mat-option [value]="100">100</mat-option>
+                    <mat-option [value]="1000">1000</mat-option>
+                    <mat-option [value]="10000">10000</mat-option>
+                    <mat-option [value]="30000">30000</mat-option>
+                    <mat-option [value]="50000">50000</mat-option>
+                    <mat-option [value]="60000">60000</mat-option>
+                </mat-select>
+            </mat-form-field>
+        </form>
+    </div>
+
+    <div class="table-container">
         <div class="progress-container">
             <mat-progress-bar mode="indeterminate" *ngIf="citiesDataSource.loading$ | async"></mat-progress-bar>
         </div>

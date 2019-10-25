@@ -5,6 +5,7 @@ import { ICityJhpCities } from 'app/shared/model/city-jhp-cities.model';
 import { CityJhpCitiesImplService } from './city-jhp-cities-impl.service';
 import { Request } from 'app/shared/util/request-util';
 import { ResponseWrapper } from 'app/shared/util/reponse-wrapper';
+import { CityJhpCitiesFilter } from './city-jhp-cities-filter';
 
 /**
  * CityJhpDataSource can be used by a matTable
@@ -37,17 +38,25 @@ export class CityJhpDataSource implements DataSource<ICityJhpCities> {
 
   /**
    * Get or refresh data depending on params on the method which will be emit by citiesSubject
+   * @param filter possible filter to use
    * @param sortField column to filter on
    * @param sortDirection  direction to filter on
    * @param pageIndex page number (use 0 by default)
    * @param pageSize the page size to get
    */
-  loadCities(sortField: string, sortDirection: string, pageIndex: number, pageSize: number) {
+  loadCities(filter: CityJhpCitiesFilter, sortField: string, sortDirection: string, pageIndex: number, pageSize: number) {
     this.loadingSubject.next(true);
 
     const q: Request = { page: pageIndex, size: pageSize };
     if (sortField) {
       q.sort = this.sort(sortField, sortDirection);
+    }
+
+    /**
+     * If you want to add new filter you can add them here
+     */
+    if (filter.nbPeopleMin) {
+      q.nbPeopleMin = filter.nbPeopleMin;
     }
 
     this.citiesService

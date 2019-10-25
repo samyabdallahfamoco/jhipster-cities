@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
 import { Location } from '@angular/common';
-import { flatMap } from 'rxjs/operators';
 import { AccountService } from 'app/core/auth/account.service';
 import { AuthServerProvider } from 'app/core/auth/auth-session.service';
 

@@ -1,11 +1,12 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { CityJhpCitiesService } from '../../city-jhp-cities.service';
+import { CityJhpCitiesService } from '../city-jhp-cities.service';
 import { ResponseWrapper } from 'app/shared/util/reponse-wrapper';
 import { ICityJhpCities } from 'app/shared/model/city-jhp-cities.model';
 import { Observable } from 'rxjs';
 import { createRequestOption } from 'app/shared/util/request-util';
 import { map } from 'rxjs/operators';
+import { SERVER_API_URL } from 'app/app.constants';
 
 /**
  * Allows to get data related to Cities endpoints
@@ -14,6 +15,11 @@ import { map } from 'rxjs/operators';
   providedIn: 'root'
 })
 export class CityJhpCitiesImplService extends CityJhpCitiesService {
+  /**
+   * The url of the extended API related to levies
+   */
+  resourceUrlExtended = SERVER_API_URL + 'api/v1/cities';
+
   /**
    * @param http in order to make http requests
    */
@@ -29,7 +35,7 @@ export class CityJhpCitiesImplService extends CityJhpCitiesService {
   queryImpl(req?: any): Observable<ResponseWrapper> {
     const options = createRequestOption(req);
     return this.http
-      .get<ICityJhpCities[]>(this.resourceUrl, { params: options, observe: 'response' })
+      .get<ICityJhpCities[]>(this.resourceUrlExtended, { params: options, observe: 'response' })
       .pipe(map((res: any) => this.convertResponse(res)));
   }
 
