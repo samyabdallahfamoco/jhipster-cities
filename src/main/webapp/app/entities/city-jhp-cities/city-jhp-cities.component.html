@@ -22,6 +22,7 @@
             <th scope="col"  jhiSortBy="name"><span>Name</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th scope="col"  jhiSortBy="nbPeople"><span>Nb People</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th scope="col"  jhiSortBy="postalCode"><span>Postal Code</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th scope="col"  jhiSortBy="dateUpdate"><span>Date Update</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th scope="col"  jhiSortBy="area.id"><span>Area</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th scope="col"></th>
             </tr>
@@ -32,6 +33,7 @@
                 <td>{{city.name}}</td>
                 <td>{{city.nbPeople}}</td>
                 <td>{{city.postalCode}}</td>
+                <td>{{city.dateUpdate | date:'medium'}}</td>
                 <td>
                     <div *ngIf="city.area">
                         <a [routerLink]="['/area-jhp-cities', city.area?.id, 'view' ]" >{{city.area?.id}}</a>

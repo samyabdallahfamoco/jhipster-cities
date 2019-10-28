@@ -8,7 +8,10 @@ import {
   MatCardModule,
   MatProgressBarModule,
   MatFormFieldModule,
-  MatSelectModule
+  MatSelectModule,
+  MatDatepickerModule,
+  MatNativeDateModule,
+  MatInputModule
 } from '@angular/material';
 
 /**
@@ -24,7 +27,10 @@ import {
     MatCardModule,
     MatFormFieldModule,
     MatSelectModule,
-    MatProgressBarModule
+    MatProgressBarModule,
+    MatDatepickerModule,
+    MatNativeDateModule,
+    MatInputModule
   ],
   exports: [
     MatButtonModule,
@@ -34,7 +40,10 @@ import {
     MatCardModule,
     MatFormFieldModule,
     MatSelectModule,
-    MatProgressBarModule
+    MatProgressBarModule,
+    MatDatepickerModule,
+    MatNativeDateModule,
+    MatInputModule
   ]
 })
 export class CustomMaterialModule {}

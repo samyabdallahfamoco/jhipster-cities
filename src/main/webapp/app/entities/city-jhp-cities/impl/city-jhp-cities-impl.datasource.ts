@@ -59,6 +59,14 @@ export class CityJhpDataSource implements DataSource<ICityJhpCities> {
       q.nbPeopleMin = filter.nbPeopleMin;
     }
 
+    if (filter.fromDate) {
+      q.fromDate = filter.fromDate;
+    }
+
+    if (filter.toDate) {
+      q.toDate = filter.toDate;
+    }
+
     this.citiesService
       .queryImpl(q)
       .pipe(

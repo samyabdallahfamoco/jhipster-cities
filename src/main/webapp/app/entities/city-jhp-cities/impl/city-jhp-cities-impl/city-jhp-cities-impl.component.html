@@ -14,6 +14,14 @@
                     <mat-option [value]="60000">60000</mat-option>
                 </mat-select>
             </mat-form-field>
+
+            <mat-form-field appearance="outline">
+                <mat-label>Date</mat-label>
+                <input matInput [matDatepicker]="picker" [max]="maxDate" formControlName="filterByDate">
+                <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                <mat-datepicker #picker disabled="false"></mat-datepicker>
+            </mat-form-field>
+
         </form>
     </div>
 

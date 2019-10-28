@@ -13,6 +13,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.time.Instant;
 import java.util.Optional;
 
 /**
@@ -36,13 +37,15 @@ public class CityServiceImplExtended extends CityServiceImpl implements CityServ
      * Get all the cities.
      *
      * @param nbOfPeopleMin the number of people min
+     * @param fromDate the date min
+     * @param toDate the date max
      * @param pageable the pagination information.
      * @return the list of entities.
      */
     @Override
     @Transactional(readOnly = true)
-    public Page<City> findListOfCities(Double nbOfPeopleMin, Pageable pageable){
-        return cityRepositoryExtended.findAllByNbPeopleGreaterThan(nbOfPeopleMin, pageable);
+    public Page<City> findListOfCities(Double nbOfPeopleMin, Instant fromDate, Instant toDate, Pageable pageable){
+        return cityRepositoryExtended.findAllViaQuery(nbOfPeopleMin, fromDate, toDate, pageable);
     }
 
 }

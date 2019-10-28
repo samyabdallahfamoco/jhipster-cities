@@ -6,6 +6,8 @@ import { FormBuilder, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { Observable } from 'rxjs';
 import { filter, map } from 'rxjs/operators';
+import * as moment from 'moment';
+import { DATE_TIME_FORMAT } from 'app/shared/constants/input.constants';
 import { JhiAlertService } from 'ng-jhipster';
 import { ICityJhpCities, CityJhpCities } from 'app/shared/model/city-jhp-cities.model';
 import { CityJhpCitiesService } from './city-jhp-cities.service';
@@ -26,6 +28,7 @@ export class CityJhpCitiesUpdateComponent implements OnInit {
     name: [null, [Validators.required]],
     nbPeople: [null, [Validators.required]],
     postalCode: [null, [Validators.required]],
+    dateUpdate: [],
     area: []
   });
 
@@ -57,6 +60,7 @@ export class CityJhpCitiesUpdateComponent implements OnInit {
       name: city.name,
       nbPeople: city.nbPeople,
       postalCode: city.postalCode,
+      dateUpdate: city.dateUpdate != null ? city.dateUpdate.format(DATE_TIME_FORMAT) : null,
       area: city.area
     });
   }
@@ -82,6 +86,8 @@ export class CityJhpCitiesUpdateComponent implements OnInit {
       name: this.editForm.get(['name']).value,
       nbPeople: this.editForm.get(['nbPeople']).value,
       postalCode: this.editForm.get(['postalCode']).value,
+      dateUpdate:
+        this.editForm.get(['dateUpdate']).value != null ? moment(this.editForm.get(['dateUpdate']).value, DATE_TIME_FORMAT) : undefined,
       area: this.editForm.get(['area']).value
     };
   }

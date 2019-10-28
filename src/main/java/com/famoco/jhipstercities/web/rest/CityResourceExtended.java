@@ -14,6 +14,9 @@ import org.springframework.util.MultiValueMap;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.UriComponentsBuilder;
 
+import java.time.Instant;
+import java.time.LocalDate;
+import java.time.ZoneId;
 import java.util.List;
 import java.util.Optional;
 
@@ -47,13 +50,24 @@ public class CityResourceExtended {
      */
     @GetMapping("/cities")
     public ResponseEntity<List<City>> getAllCities(@RequestParam("nbPeopleMin") Optional<Double> pNbPeopleMin,
+                                                   @RequestParam("fromDate") Optional<LocalDate> pFromDate,
+                                                   @RequestParam("toDate") Optional<LocalDate> pToDate,
                                                                         Pageable pageable, @RequestParam MultiValueMap<String, String> queryParams, UriComponentsBuilder uriBuilder) {
         double nbPeopleMin = 0;
         if (pNbPeopleMin.isPresent()) {
             nbPeopleMin = pNbPeopleMin.get();
         }
 
-        Page<City> page = cityServiceExtended.findListOfCities(nbPeopleMin, pageable);
+        Instant fromDate = null;
+        if (pFromDate.isPresent()) {
+            fromDate = pFromDate.get().atStartOfDay(ZoneId.systemDefault()).toInstant();
+        }
+        Instant toDate = null;
+        if (pToDate.isPresent()) {
+            toDate =  pToDate.get().atStartOfDay(ZoneId.systemDefault()).plusDays(1).toInstant();
+        }
+
+        Page<City> page = cityServiceExtended.findListOfCities(nbPeopleMin, fromDate, toDate, pageable);
         HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(uriBuilder.queryParams(queryParams), page);
         return ResponseEntity.ok().headers(headers).body(page.getContent());
     }

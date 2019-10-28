@@ -1,12 +1,13 @@
 import { Component, OnInit, OnDestroy, ViewChild, AfterViewInit } from '@angular/core';
 import { CityJhpDataSource } from '../city-jhp-cities-impl.datasource';
 import { Subject } from 'rxjs';
-import { MatSort, MatPaginator } from '@angular/material';
+import { MatSort, MatPaginator, MatDatepicker } from '@angular/material';
 import { CityJhpCitiesImplService } from '../city-jhp-cities-impl.service';
 import { tap, debounceTime, distinctUntilChanged, filter, takeUntil } from 'rxjs/operators';
 import { merge } from 'rxjs';
 import { FormBuilder } from '@angular/forms';
 import { CityJhpCitiesFilter } from '../city-jhp-cities-filter';
+import * as moment from 'moment';
 
 @Component({
   selector: 'jhi-city-jhp-cities-impl',
@@ -38,10 +39,21 @@ export class CityJhpCitiesImplComponent implements OnInit, AfterViewInit, OnDest
   @ViewChild(MatPaginator, { static: true }) private _paginator: MatPaginator;
 
   /**
+   * The picker to display date with
+   */
+  @ViewChild(MatDatepicker, { static: true }) private picker: MatDatepicker<moment.Moment>;
+
+  /**
+   * Used by the template in the date filter to set the max date
+   */
+  public maxDate = new Date();
+
+  /**
    * Each input inside the form view are describe into this FormGroup
    */
   public filterForm = this.fb.group({
-    filterNbPeopleMin: 0
+    filterNbPeopleMin: 0,
+    filterByDate: { value: '', disabled: true }
   });
 
   /**
@@ -57,6 +69,15 @@ export class CityJhpCitiesImplComponent implements OnInit, AfterViewInit, OnDest
     this.citiesDataSource = new CityJhpDataSource(this.cityService);
     this.citiesDataSource.loadCities(this.filter, 'id', 'desc', 0, 10);
     this.subscribeToReactiveForm();
+  }
+
+  /**
+   * For each input from the form, checking if the value change and making request to the API
+   * In order to refresh the table
+   */
+  private subscribeToReactiveForm(): void {
+    this._filterFormField('filterNbPeopleMin', 'nbPeopleMin', (val: number) => val);
+    this._filterDateRange();
   }
 
   /**
@@ -85,11 +106,27 @@ export class CityJhpCitiesImplComponent implements OnInit, AfterViewInit, OnDest
   }
 
   /**
-   * For each input from the form, checking if the value change and making request to the API
-   * In order to refresh the table
+   * This filter method is used for filterByDate filter field.
    */
-  private subscribeToReactiveForm(): void {
-    this._filterFormField('filterNbPeopleMin', 'nbPeopleMin', (val: number) => val);
+  private _filterDateRange() {
+    this.filterForm
+      .get('filterByDate')
+      .valueChanges.pipe(
+        debounceTime(150),
+        distinctUntilChanged((a, b) => JSON.stringify(a) === JSON.stringify(b)),
+        filter(value => value !== null),
+        takeUntil(this.destroy$)
+      )
+      .subscribe(value => {
+        this._paginator.pageIndex = 0;
+        this.filter['fromDate'] = moment(value)
+          .startOf('day')
+          .format('YYYY-MM-DD');
+        this.filter['toDate'] = moment(value)
+          .endOf('day')
+          .format('YYYY-MM-DD');
+        this.loadCitiesPage();
+      });
   }
 
   /**
