@@ -5,6 +5,7 @@ import javax.persistence.*;
 import javax.validation.constraints.*;
 
 import java.io.Serializable;
+import java.time.Instant;
 
 /**
  * A City.
@@ -31,6 +32,9 @@ public class City implements Serializable {
     @NotNull
     @Column(name = "postal_code", nullable = false)
     private String postalCode;
+
+    @Column(name = "date_update")
+    private Instant dateUpdate;
 
     @ManyToOne
     @JsonIgnoreProperties("cities")
@@ -84,6 +88,19 @@ public class City implements Serializable {
         this.postalCode = postalCode;
     }
 
+    public Instant getDateUpdate() {
+        return dateUpdate;
+    }
+
+    public City dateUpdate(Instant dateUpdate) {
+        this.dateUpdate = dateUpdate;
+        return this;
+    }
+
+    public void setDateUpdate(Instant dateUpdate) {
+        this.dateUpdate = dateUpdate;
+    }
+
     public Area getArea() {
         return area;
     }
@@ -121,6 +138,7 @@ public class City implements Serializable {
             ", name='" + getName() + "'" +
             ", nbPeople=" + getNbPeople() +
             ", postalCode='" + getPostalCode() + "'" +
+            ", dateUpdate='" + getDateUpdate() + "'" +
             "}";
     }
 }

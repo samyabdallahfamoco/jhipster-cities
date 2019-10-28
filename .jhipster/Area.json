@@ -24,7 +24,7 @@
             "otherEntityField": "id"
         }
     ],
-    "changelogDate": "20191024113051",
+    "changelogDate": "20191028105203",
     "entityTableName": "area",
     "dto": "no",
     "pagination": "pagination",

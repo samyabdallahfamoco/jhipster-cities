@@ -1,6 +1,8 @@
 import { TestBed, getTestBed } from '@angular/core/testing';
 import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
 import { take, map } from 'rxjs/operators';
+import * as moment from 'moment';
+import { DATE_TIME_FORMAT } from 'app/shared/constants/input.constants';
 import { CityJhpCitiesService } from 'app/entities/city-jhp-cities/city-jhp-cities.service';
 import { ICityJhpCities, CityJhpCities } from 'app/shared/model/city-jhp-cities.model';
 
@@ -11,6 +13,7 @@ describe('Service Tests', () => {
     let httpMock: HttpTestingController;
     let elemDefault: ICityJhpCities;
     let expectedResult;
+    let currentDate: moment.Moment;
     beforeEach(() => {
       TestBed.configureTestingModule({
         imports: [HttpClientTestingModule]
@@ -19,13 +22,19 @@ describe('Service Tests', () => {
       injector = getTestBed();
       service = injector.get(CityJhpCitiesService);
       httpMock = injector.get(HttpTestingController);
+      currentDate = moment();
 
-      elemDefault = new CityJhpCities(0, 'AAAAAAA', 0, 'AAAAAAA');
+      elemDefault = new CityJhpCities(0, 'AAAAAAA', 0, 'AAAAAAA', currentDate);
     });
 
     describe('Service methods', () => {
       it('should find an element', () => {
-        const returnedFromService = Object.assign({}, elemDefault);
+        const returnedFromService = Object.assign(
+          {
+            dateUpdate: currentDate.format(DATE_TIME_FORMAT)
+          },
+          elemDefault
+        );
         service
           .find(123)
           .pipe(take(1))
@@ -39,11 +48,17 @@ describe('Service Tests', () => {
       it('should create a CityJhpCities', () => {
         const returnedFromService = Object.assign(
           {
-            id: 0
+            id: 0,
+            dateUpdate: currentDate.format(DATE_TIME_FORMAT)
           },
           elemDefault
         );
-        const expected = Object.assign({}, returnedFromService);
+        const expected = Object.assign(
+          {
+            dateUpdate: currentDate
+          },
+          returnedFromService
+        );
         service
           .create(new CityJhpCities(null))
           .pipe(take(1))
@@ -58,12 +73,18 @@ describe('Service Tests', () => {
           {
             name: 'BBBBBB',
             nbPeople: 1,
-            postalCode: 'BBBBBB'
+            postalCode: 'BBBBBB',
+            dateUpdate: currentDate.format(DATE_TIME_FORMAT)
           },
           elemDefault
         );
 
-        const expected = Object.assign({}, returnedFromService);
+        const expected = Object.assign(
+          {
+            dateUpdate: currentDate
+          },
+          returnedFromService
+        );
         service
           .update(expected)
           .pipe(take(1))
@@ -78,11 +99,17 @@ describe('Service Tests', () => {
           {
             name: 'BBBBBB',
             nbPeople: 1,
-            postalCode: 'BBBBBB'
+            postalCode: 'BBBBBB',
+            dateUpdate: currentDate.format(DATE_TIME_FORMAT)
           },
           elemDefault
         );
-        const expected = Object.assign({}, returnedFromService);
+        const expected = Object.assign(
+          {
+            dateUpdate: currentDate
+          },
+          returnedFromService
+        );
         service
           .query(expected)
           .pipe(

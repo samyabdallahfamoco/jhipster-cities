@@ -25,7 +25,7 @@
             "ownerSide": false
         }
     ],
-    "changelogDate": "20191024113052",
+    "changelogDate": "20191028105204",
     "entityTableName": "country",
     "dto": "no",
     "pagination": "pagination",

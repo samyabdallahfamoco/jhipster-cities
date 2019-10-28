@@ -1,4 +1,0 @@
-diff a/src/main/webapp/app/entities/city-jhp-cities/impl/city-jhp-cities-impl/city-jhp-cities-impl.component.ts b/src/main/webapp/app/entities/city-jhp-cities/impl/city-jhp-cities-impl/city-jhp-cities-impl.component.ts	(rejected hunks)
-@@ -44 +44 @@ export class CityJhpCitiesImplComponent implements OnInit, AfterViewInit, OnDest
--    filterNbPeopleUpper: 0,
-+    filterNbPeopleUpper: 0

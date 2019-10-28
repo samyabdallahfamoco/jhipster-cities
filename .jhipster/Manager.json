@@ -26,7 +26,7 @@
             "ownerSide": true
         }
     ],
-    "changelogDate": "20191024113053",
+    "changelogDate": "20191028105205",
     "entityTableName": "manager",
     "dto": "no",
     "pagination": "pagination",

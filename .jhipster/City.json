@@ -21,6 +21,10 @@
             "fieldValidateRules": [
                 "required"
             ]
+        },
+        {
+            "fieldName": "dateUpdate",
+            "fieldType": "Instant"
         }
     ],
     "relationships": [
@@ -32,7 +36,7 @@
             "otherEntityField": "id"
         }
     ],
-    "changelogDate": "20191024113050",
+    "changelogDate": "20191028105202",
     "entityTableName": "city",
     "dto": "no",
     "pagination": "pagination",

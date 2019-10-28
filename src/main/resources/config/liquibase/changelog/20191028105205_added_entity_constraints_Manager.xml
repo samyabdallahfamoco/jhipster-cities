@@ -6,7 +6,7 @@
     <!--
         Added the constraints for entity Manager.
     -->
-    <changeSet id="20191024113053-2" author="jhipster">
+    <changeSet id="20191028105205-2" author="jhipster">
         
         <addForeignKeyConstraint baseColumnNames="manager_id"
                                  baseTableName="manager_countries"

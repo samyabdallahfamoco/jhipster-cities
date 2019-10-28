@@ -21,6 +21,8 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.validation.Validator;
 
 import javax.persistence.EntityManager;
+import java.time.Instant;
+import java.time.temporal.ChronoUnit;
 import java.util.List;
 
 import static com.famoco.jhipstercities.web.rest.TestUtil.createFormattingConversionService;
@@ -43,6 +45,9 @@ public class CityResourceIT {
 
     private static final String DEFAULT_POSTAL_CODE = "AAAAAAAAAA";
     private static final String UPDATED_POSTAL_CODE = "BBBBBBBBBB";
+
+    private static final Instant DEFAULT_DATE_UPDATE = Instant.ofEpochMilli(0L);
+    private static final Instant UPDATED_DATE_UPDATE = Instant.now().truncatedTo(ChronoUnit.MILLIS);
 
     @Autowired
     private CityRepository cityRepository;
@@ -91,7 +96,8 @@ public class CityResourceIT {
         City city = new City()
             .name(DEFAULT_NAME)
             .nbPeople(DEFAULT_NB_PEOPLE)
-            .postalCode(DEFAULT_POSTAL_CODE);
+            .postalCode(DEFAULT_POSTAL_CODE)
+            .dateUpdate(DEFAULT_DATE_UPDATE);
         return city;
     }
     /**
@@ -104,7 +110,8 @@ public class CityResourceIT {
         City city = new City()
             .name(UPDATED_NAME)
             .nbPeople(UPDATED_NB_PEOPLE)
-            .postalCode(UPDATED_POSTAL_CODE);
+            .postalCode(UPDATED_POSTAL_CODE)
+            .dateUpdate(UPDATED_DATE_UPDATE);
         return city;
     }
 
@@ -131,6 +138,7 @@ public class CityResourceIT {
         assertThat(testCity.getName()).isEqualTo(DEFAULT_NAME);
         assertThat(testCity.getNbPeople()).isEqualTo(DEFAULT_NB_PEOPLE);
         assertThat(testCity.getPostalCode()).isEqualTo(DEFAULT_POSTAL_CODE);
+        assertThat(testCity.getDateUpdate()).isEqualTo(DEFAULT_DATE_UPDATE);
     }
 
     @Test
@@ -220,7 +228,8 @@ public class CityResourceIT {
             .andExpect(jsonPath("$.[*].id").value(hasItem(city.getId().intValue())))
             .andExpect(jsonPath("$.[*].name").value(hasItem(DEFAULT_NAME)))
             .andExpect(jsonPath("$.[*].nbPeople").value(hasItem(DEFAULT_NB_PEOPLE.doubleValue())))
-            .andExpect(jsonPath("$.[*].postalCode").value(hasItem(DEFAULT_POSTAL_CODE)));
+            .andExpect(jsonPath("$.[*].postalCode").value(hasItem(DEFAULT_POSTAL_CODE)))
+            .andExpect(jsonPath("$.[*].dateUpdate").value(hasItem(DEFAULT_DATE_UPDATE.toString())));
     }
     
     @Test
@@ -236,7 +245,8 @@ public class CityResourceIT {
             .andExpect(jsonPath("$.id").value(city.getId().intValue()))
             .andExpect(jsonPath("$.name").value(DEFAULT_NAME))
             .andExpect(jsonPath("$.nbPeople").value(DEFAULT_NB_PEOPLE.doubleValue()))
-            .andExpect(jsonPath("$.postalCode").value(DEFAULT_POSTAL_CODE));
+            .andExpect(jsonPath("$.postalCode").value(DEFAULT_POSTAL_CODE))
+            .andExpect(jsonPath("$.dateUpdate").value(DEFAULT_DATE_UPDATE.toString()));
     }
 
     @Test
@@ -262,7 +272,8 @@ public class CityResourceIT {
         updatedCity
             .name(UPDATED_NAME)
             .nbPeople(UPDATED_NB_PEOPLE)
-            .postalCode(UPDATED_POSTAL_CODE);
+            .postalCode(UPDATED_POSTAL_CODE)
+            .dateUpdate(UPDATED_DATE_UPDATE);
 
         restCityMockMvc.perform(put("/api/cities")
             .contentType(TestUtil.APPLICATION_JSON_UTF8)
@@ -276,6 +287,7 @@ public class CityResourceIT {
         assertThat(testCity.getName()).isEqualTo(UPDATED_NAME);
         assertThat(testCity.getNbPeople()).isEqualTo(UPDATED_NB_PEOPLE);
         assertThat(testCity.getPostalCode()).isEqualTo(UPDATED_POSTAL_CODE);
+        assertThat(testCity.getDateUpdate()).isEqualTo(UPDATED_DATE_UPDATE);
     }
 
     @Test
